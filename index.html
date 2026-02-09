@@ -713,6 +713,156 @@ header .subtitle {
     line-height: 1.6;
 }
 
+/* ---- Case Study Section ---- */
+.case-study-section {
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid var(--slate-200);
+}
+
+.case-study-section h3 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--slate-900);
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.case-study-card {
+    background: linear-gradient(135deg, rgba(99,102,241,0.03), rgba(6,182,212,0.03));
+    border: 1px solid rgba(99,102,241,0.15);
+    border-radius: var(--radius);
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+}
+
+.case-study-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: linear-gradient(180deg, var(--accent), var(--cyan));
+}
+
+.case-study-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.case-study-icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--accent), var(--cyan));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.4rem;
+    box-shadow: 0 4px 12px rgba(99,102,241,0.25);
+}
+
+.case-study-title h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--slate-900);
+    margin-bottom: 4px;
+}
+
+.case-study-location {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.case-study-location svg {
+    width: 14px;
+    height: 14px;
+}
+
+.case-study-content {
+    display: grid;
+    gap: 16px;
+}
+
+.case-study-block {
+    background: rgba(255,255,255,0.6);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    border: 1px solid rgba(0,0,0,0.04);
+}
+
+.case-study-block h5 {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--slate-400);
+    margin-bottom: 8px;
+}
+
+.case-study-block p {
+    font-size: 0.88rem;
+    color: var(--slate-700);
+    line-height: 1.65;
+}
+
+.case-study-outcome {
+    background: linear-gradient(135deg, var(--emerald-light), rgba(209,250,229,0.5)) !important;
+    border-color: rgba(16,185,129,0.15) !important;
+}
+
+.case-study-outcome h5 {
+    color: var(--emerald) !important;
+}
+
+.case-study-metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.case-study-metric {
+    background: rgba(255,255,255,0.8);
+    border-radius: var(--radius-xs);
+    padding: 10px 14px;
+    border: 1px solid rgba(16,185,129,0.2);
+}
+
+.case-study-metric .metric-value {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--emerald);
+    display: block;
+}
+
+.case-study-metric .metric-label {
+    font-size: 0.72rem;
+    color: var(--slate-500);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+@media (min-width: 640px) {
+    .case-study-content {
+        grid-template-columns: 1fr 1fr;
+    }
+    .case-study-outcome {
+        grid-column: 1 / -1;
+    }
+}
+
 /* ---- Results Actions ---- */
 .results-actions {
     display: flex;
@@ -774,6 +924,12 @@ footer {
     .diagnosis-tag .tag-label { color: #666; }
     .diagnosis-summary h3 { color: #333; }
     .solution-item { break-inside: avoid; backdrop-filter: none; background: #f8fafc; }
+    .case-study-section { border-top: 2px solid #333; }
+    .case-study-card { background: #f8fafc; border: 1px solid #ccc; page-break-inside: avoid; }
+    .case-study-card::before { background: #333; }
+    .case-study-block { background: #fff; border: 1px solid #ddd; }
+    .case-study-outcome { background: #ecfdf5 !important; }
+    .case-study-metric { border: 1px solid #10b981; }
 }
     </style>
 </head>
@@ -1097,6 +1253,11 @@ footer {
 
             <!-- Solutions -->
             <div class="solutions-section" id="solutionsSection">
+                <!-- Dynamically populated -->
+            </div>
+
+            <!-- Case Study -->
+            <div class="case-study-section" id="caseStudySection">
                 <!-- Dynamically populated -->
             </div>
 
@@ -1996,6 +2157,202 @@ const solutionsDatabase = {
     'developer|rural|qualitative|financing|title': { categories: [{ name: 'Documentation', solutions: [{ title: 'Help clients document property rights', desc: 'Assist improvement clients with obtaining formal property documentation as part of the service.' }]}] },
 };
 
+// ---- Case Studies Database ----
+const caseStudiesDatabase = {
+    // GOVERNMENT - URBAN - QUANTITATIVE - SUPPLY
+    'government|urban|quantitative|supply|land': {
+        title: 'Singapore Public Housing Program',
+        location: 'Singapore',
+        context: 'In the 1960s, Singapore faced severe housing shortages with over 70% of the population living in overcrowded slums and squatter settlements. Land was scarce and expensive on the small island nation.',
+        intervention: 'The government enacted the Land Acquisition Act (1966), enabling compulsory land purchase at below-market rates. The Housing & Development Board (HDB) was empowered to plan, build, and manage public housing at scale. Land was leased on 99-year terms rather than sold freehold.',
+        outcome: 'Today, over 80% of Singaporeans live in HDB flats, with 90% homeownership rate. The program delivered over 1 million housing units and transformed Singapore into a city with one of the highest quality housing stocks in Asia.',
+        metrics: [{ value: '80%', label: 'Population in public housing' }, { value: '1M+', label: 'Units delivered' }, { value: '90%', label: 'Homeownership rate' }]
+    },
+    'government|urban|quantitative|supply|materials': {
+        title: 'India Fly Ash Brick Promotion',
+        location: 'India',
+        context: 'India faced dual challenges: massive housing shortage requiring 60+ million units and environmental pollution from coal power plant waste (fly ash). Traditional clay brick production was depleting topsoil and using excessive energy.',
+        intervention: 'The government mandated fly ash utilization, provided subsidies for fly ash brick manufacturing units, and required use of fly ash bricks in government construction within 100km of thermal power plants. Technical standards and quality certification were established.',
+        outcome: 'Fly ash brick production increased from near zero to over 20 billion bricks annually. Construction costs reduced by 15-20%, and millions of tons of industrial waste were diverted from landfills while preserving agricultural topsoil.',
+        metrics: [{ value: '20B+', label: 'Bricks produced annually' }, { value: '15-20%', label: 'Cost reduction' }, { value: '100M+', label: 'Tons waste utilized' }]
+    },
+    'government|urban|quantitative|supply|labor': {
+        title: 'South Africa EPWP Construction Training',
+        location: 'South Africa',
+        context: 'Post-apartheid South Africa faced both massive housing backlogs (2.1 million units) and high unemployment (over 25%). The construction sector lacked skilled workers while millions needed jobs.',
+        intervention: 'The Expanded Public Works Programme (EPWP) integrated construction skills training into public housing delivery. Workers were trained on-site while building homes, receiving certification upon completion. The program prioritized women and youth.',
+        outcome: 'Over 500,000 work opportunities created in the construction sector. Thousands of workers gained formal trade certifications. The program contributed to delivering over 3 million housing units while building human capital.',
+        metrics: [{ value: '500K+', label: 'Jobs created' }, { value: '3M+', label: 'Houses built' }, { value: '40%', label: 'Women participation' }]
+    },
+    'government|urban|quantitative|supply|regulatory': {
+        title: 'Rwanda Construction Permit Reform',
+        location: 'Kigali, Rwanda',
+        context: 'Rwanda\'s construction permit process took over 250 days and required 14 procedures, severely constraining formal housing development and pushing construction into the informal sector.',
+        intervention: 'Rwanda implemented comprehensive regulatory reform: one-stop center for construction permits, online application system, risk-based inspections, and strict processing timelines with accountability. Building codes were modernized and simplified.',
+        outcome: 'Construction permit time reduced from 250 to 30 days. Rwanda rose from 150th to 38th globally in "Dealing with Construction Permits" rankings. Formal construction activity increased significantly in Kigali.',
+        metrics: [{ value: '30', label: 'Days for permit (from 250)' }, { value: '38th', label: 'Global ranking' }, { value: '5x', label: 'Faster processing' }]
+    },
+    'government|urban|quantitative|supply|infrastructure': {
+        title: 'Indonesia KOTAKU Program',
+        location: 'Indonesia (271 cities)',
+        context: 'Indonesia had over 38,000 hectares of urban slums housing millions in substandard conditions without adequate water, sanitation, drainage, and road access. Slum areas couldn\'t attract formal housing investment.',
+        intervention: 'The National Slum Upgrading Program (KOTAKU) invested $1.7 billion in trunk infrastructure for slum areas: roads, drainage, water supply, sanitation, and solid waste management. Communities participated in planning and implementation.',
+        outcome: 'The program improved living conditions for 9.7 million people across 11,000 hectares of slum areas. Basic service coverage increased dramatically, and upgraded areas attracted private housing investment.',
+        metrics: [{ value: '9.7M', label: 'People benefited' }, { value: '11,000', label: 'Hectares upgraded' }, { value: '$1.7B', label: 'Invested' }]
+    },
+    // GOVERNMENT - URBAN - QUANTITATIVE - FINANCING
+    'government|urban|quantitative|financing|income': {
+        title: 'Mexico Infonavit Workers\' Housing Fund',
+        location: 'Mexico',
+        context: 'Mexico\'s formal mortgage market excluded the majority of workers, particularly those with irregular income or informal employment. Traditional banks required documentation that most households couldn\'t provide.',
+        intervention: 'Infonavit was established as a mandatory employer-employee contribution scheme (5% of salary). The fund provides mortgage financing using contribution history as creditworthiness indicator rather than traditional income documentation. Payments are deducted at source.',
+        outcome: 'Infonavit has financed over 11 million homes since 1972, serving households typically excluded from commercial mortgages. It manages a portfolio of $100+ billion and is the largest mortgage provider in Latin America.',
+        metrics: [{ value: '11M+', label: 'Homes financed' }, { value: '$100B+', label: 'Portfolio value' }, { value: '#1', label: 'In Latin America' }]
+    },
+    'government|urban|quantitative|financing|interest_rates': {
+        title: 'Chile Mortgage Liquidity Facility',
+        location: 'Chile',
+        context: 'Chilean mortgage lenders faced funding mismatches—short-term deposits funding long-term mortgages—which increased risk premiums and mortgage rates. Capital market development was limited.',
+        intervention: 'Chile developed a robust mortgage-backed securities market with standardized "letras hipotecarias" (mortgage bonds). The government provided regulatory framework, tax incentives, and initial credit enhancement. Pension funds became major investors.',
+        outcome: 'Mortgage rates fell significantly while loan terms extended to 20-30 years. Homeownership increased from 57% to 68%. Chile\'s housing finance market became one of the deepest in Latin America relative to GDP.',
+        metrics: [{ value: '68%', label: 'Homeownership (from 57%)' }, { value: '25%', label: 'Mortgage/GDP ratio' }, { value: '30yr', label: 'Loan terms available' }]
+    },
+    'government|urban|quantitative|financing|mortgage_products': {
+        title: 'Malaysia Islamic Housing Finance',
+        location: 'Malaysia',
+        context: 'Malaysia\'s Muslim-majority population needed Sharia-compliant alternatives to conventional interest-based mortgages. Existing Islamic products were limited and often more expensive than conventional options.',
+        intervention: 'Malaysia developed comprehensive regulatory frameworks for Islamic housing finance products including Bai\' Bithaman Ajil (deferred payment sale), Musharakah Mutanaqisah (diminishing partnership), and Ijarah (lease-to-own). Standards ensured competitive pricing with conventional products.',
+        outcome: 'Islamic housing finance grew to represent over 35% of Malaysia\'s mortgage market. Product innovation continued with new structures meeting diverse needs. Malaysia became a global leader in Islamic housing finance.',
+        metrics: [{ value: '35%+', label: 'Market share' }, { value: '20+', label: 'Islamic banks offering' }, { value: '#1', label: 'Global Islamic finance hub' }]
+    },
+    'government|urban|quantitative|financing|subsidies': {
+        title: 'Chile Housing Subsidy System',
+        location: 'Chile',
+        context: 'Chile\'s 1970s housing policy produced poor-quality public housing in peripheral locations. The system was fiscally unsustainable and created dependency rather than enabling household wealth-building.',
+        intervention: 'Chile pioneered demand-side capital subsidies: means-tested grants that households could combine with savings and mortgages to purchase private housing. Subsidies followed households (portable), not units. Private sector built and sold the housing.',
+        outcome: 'The system has delivered over 2 million housing solutions since 1978. It mobilized private sector investment, built household assets, and maintained fiscal sustainability. The model has been replicated across Latin America.',
+        metrics: [{ value: '2M+', label: 'Housing solutions' }, { value: '400K', label: 'Subsidies per year (peak)' }, { value: '15+', label: 'Countries adapted model' }]
+    },
+    'government|urban|quantitative|financing|title': {
+        title: 'Rwanda National Land Tenure Regularization',
+        location: 'Rwanda',
+        context: 'After the 1994 genocide, Rwanda faced complex land disputes and most land was unregistered. Without formal titles, households couldn\'t use property as collateral, and investment in housing was limited.',
+        intervention: 'Rwanda implemented systematic land registration covering the entire country. Community-based adjudication resolved disputes locally. Digital land registry was created with low-cost, accessible registration. Women were granted equal land rights.',
+        outcome: 'Over 11 million parcels registered in 5 years—one of the fastest land registration programs globally. Land disputes dropped by 90%. Mortgage lending increased significantly as banks could accept registered land as collateral.',
+        metrics: [{ value: '11M', label: 'Parcels registered' }, { value: '5yrs', label: 'Completion time' }, { value: '90%', label: 'Dispute reduction' }]
+    },
+    // GOVERNMENT - URBAN - QUALITATIVE
+    'government|urban|qualitative|supply|land': {
+        title: 'Medellín Urban Upgrading',
+        location: 'Medellín, Colombia',
+        context: 'Medellín\'s informal hillside settlements (comunas) housed hundreds of thousands in precarious conditions. Traditional slum clearance approaches were politically and socially unacceptable.',
+        intervention: 'Instead of relocation, the city invested in in-situ upgrading: cable car transit (Metrocable), escalators on steep hillsides, public libraries, parks, and community centers in informal areas. Land tenure was regularized where possible.',
+        outcome: 'Homicide rates in upgraded areas dropped by 66%. Property values increased substantially. The program demonstrated that upgrading could transform marginalized neighborhoods without displacement. Medellín won the "Most Innovative City" award in 2013.',
+        metrics: [{ value: '66%', label: 'Homicide reduction' }, { value: '300K+', label: 'Residents benefited' }, { value: '#1', label: 'Most Innovative City 2013' }]
+    },
+    'government|urban|qualitative|supply|infrastructure': {
+        title: 'Brazil Favela-Bairro Program',
+        location: 'Rio de Janeiro, Brazil',
+        context: 'Rio\'s favelas housed 1.5 million people in communities lacking basic services: paved roads, drainage, water supply, sewerage, and public spaces. Residents faced stigma and exclusion from the formal city.',
+        intervention: 'Favela-Bairro invested $600 million to transform favelas into formal neighborhoods through infrastructure upgrading: streets, water, sewerage, drainage, lighting, and social facilities. Communities participated in design and implementation.',
+        outcome: 'Over 500,000 residents in 143 favelas received upgraded infrastructure. Property values increased 80-120%. The program demonstrated scalable slum upgrading and influenced national policy. Child mortality decreased in upgraded areas.',
+        metrics: [{ value: '143', label: 'Favelas upgraded' }, { value: '500K', label: 'Residents benefited' }, { value: '100%', label: 'Property value increase' }]
+    },
+    // GOVERNMENT - RURAL
+    'government|rural|quantitative|supply|land': {
+        title: 'Ethiopia Rural Land Certification',
+        location: 'Ethiopia',
+        context: 'Ethiopian farmers had use rights but no formal documentation, creating insecurity and limiting investment in housing and land improvements. Women\'s land rights were particularly vulnerable.',
+        intervention: 'Ethiopia implemented low-cost, community-based land certification covering rural areas. Low-tech demarcation using local committees kept costs under $1 per parcel. Certificates were issued jointly to husbands and wives.',
+        outcome: 'Over 20 million parcels certified. Land-related disputes decreased significantly. Investment in land improvements (including housing) increased. Women\'s land tenure security improved dramatically through joint certification.',
+        metrics: [{ value: '20M+', label: 'Parcels certified' }, { value: '<$1', label: 'Cost per parcel' }, { value: '50%', label: 'Increase in land investment' }]
+    },
+    'government|rural|quantitative|supply|materials': {
+        title: 'Vietnam Rural Housing Materials Program',
+        location: 'Vietnam',
+        context: 'Rural Vietnam relied heavily on temporary housing materials (bamboo, thatch) that required frequent replacement and offered poor protection against typhoons. Durable materials were expensive and inaccessible.',
+        intervention: 'The government subsidized local production of durable, affordable materials (concrete blocks, metal roofing) and established distribution networks in rural areas. Technical assistance helped households upgrade construction techniques.',
+        outcome: 'Proportion of permanent rural houses increased from 15% to over 60% in two decades. Typhoon damage to housing reduced significantly. Local material production created rural employment.',
+        metrics: [{ value: '60%', label: 'Permanent houses (from 15%)' }, { value: '70%', label: 'Less storm damage' }, { value: '10K+', label: 'Local jobs created' }]
+    },
+    // BANK - URBAN - QUANTITATIVE - FINANCING
+    'bank|urban|quantitative|financing|income': {
+        title: 'SEWA Bank Housing Loans for Informal Workers',
+        location: 'India',
+        context: 'Self-Employed Women\'s Association (SEWA) members in India—street vendors, home-based workers, domestic workers—were entirely excluded from formal housing finance due to lack of income documentation.',
+        intervention: 'SEWA Bank developed specialized housing microfinance products using peer guarantees, savings track records, and alternative income assessment. Loans financed incremental construction, renovation, and land purchase.',
+        outcome: 'Over 250,000 housing loans disbursed to informal women workers. Default rates remained below 3%. The model proved that informal sector workers are creditworthy with appropriate product design.',
+        metrics: [{ value: '250K+', label: 'Loans disbursed' }, { value: '<3%', label: 'Default rate' }, { value: '95%', label: 'Women borrowers' }]
+    },
+    'bank|urban|quantitative|financing|interest_rates': {
+        title: 'Morocco FOGARIM Guarantee Fund',
+        location: 'Morocco',
+        context: 'Moroccan banks perceived low-income housing loans as too risky, charging high interest rates or refusing to lend. Middle-income households struggled to afford mortgages at 12%+ interest rates.',
+        intervention: 'The government established FOGARIM, a guarantee fund covering 70% of losses on qualifying housing loans to low and middle-income households. Banks reduced risk premiums, and borrowers accessed better rates.',
+        outcome: 'Mortgage interest rates dropped from 12%+ to 5-6% for qualifying borrowers. Over 100,000 households accessed guaranteed loans. Bank lending to low-income segments increased dramatically.',
+        metrics: [{ value: '6%', label: 'Interest rate (from 12%)' }, { value: '100K+', label: 'Loans guaranteed' }, { value: '70%', label: 'Guarantee coverage' }]
+    },
+    'bank|urban|quantitative|financing|mortgage_products': {
+        title: 'South Africa Home Loan Guarantee Company',
+        location: 'South Africa',
+        context: 'Post-apartheid South Africa had a massive "gap market"—households earning too much for subsidies but too little for conventional mortgages. Banks had limited appetite for this segment.',
+        intervention: 'The Home Loan Guarantee Company was created to provide portfolio guarantees to banks lending in the affordable market. Banks developed new products specifically for the gap market, supported by guarantee coverage.',
+        outcome: 'Bank lending to the affordable market increased significantly. Default rates remained manageable with the guarantee backstop. The facility demonstrated the viability of affordable market lending.',
+        metrics: [{ value: 'R15B+', label: 'Loans supported' }, { value: '35K+', label: 'Households served' }, { value: '4%', label: 'Average default rate' }]
+    },
+    'bank|urban|quantitative|financing|subsidies': {
+        title: 'Egypt Mortgage Finance Fund',
+        location: 'Egypt',
+        context: 'Egypt\'s mortgage market was severely underdeveloped with less than 1% mortgage penetration. Banks lacked long-term funding, and households lacked down payments for the few products available.',
+        intervention: 'The Mortgage Finance Fund provided capital subsidies to qualifying households (down payment support) combined with mortgage guarantee facility for participating banks. The fund also supported development of mortgage refinancing.',
+        outcome: 'Mortgage lending grew significantly from near-zero base. Over 500,000 housing units financed through the subsidy program. The intervention kickstarted Egypt\'s mortgage market development.',
+        metrics: [{ value: '500K+', label: 'Units financed' }, { value: '15%', label: 'Down payment support' }, { value: '10x', label: 'Mortgage market growth' }]
+    },
+    // DEVELOPER - URBAN - QUANTITATIVE
+    'developer|urban|quantitative|supply|land': {
+        title: 'Brazil Minha Casa Minha Vida Developer Model',
+        location: 'Brazil',
+        context: 'Brazilian developers focused on high-end markets due to land costs and regulatory complexity in the affordable segment. Housing production for low-income families was minimal.',
+        intervention: 'MCMV program provided developers with: streamlined regulations, government land contributions, guaranteed off-take of units, and construction financing. Developers received predictable margins with reduced risk.',
+        outcome: 'Over 4 million housing units contracted through the program. Large developers entered the affordable market at scale. Housing production for low-income families increased dramatically.',
+        metrics: [{ value: '4M+', label: 'Units contracted' }, { value: '50+', label: 'Major developers participating' }, { value: '$100B+', label: 'Investment mobilized' }]
+    },
+    'developer|urban|quantitative|supply|materials': {
+        title: 'India Affordable Housing Technology Adoption',
+        location: 'India',
+        context: 'Indian affordable housing developers faced cost pressures making projects unviable. Traditional construction methods were slow, labor-intensive, and produced inconsistent quality.',
+        intervention: 'Pioneering developers adopted technologies including precast concrete, aluminum formwork, and tunnel formwork systems. Construction time reduced from 3+ years to under 1 year. Government provided technology subsidies and fast-track approvals.',
+        outcome: 'Construction costs reduced by 15-20% while quality improved. Project delivery accelerated significantly. Several developers scaled to deliver over 100,000 affordable units annually.',
+        metrics: [{ value: '20%', label: 'Cost reduction' }, { value: '3x', label: 'Faster construction' }, { value: '100K+', label: 'Units per year' }]
+    },
+    // DEVELOPER - RURAL
+    'developer|rural|quantitative|supply|land': {
+        title: 'Kenya Incremental Housing Sites & Services',
+        location: 'Kenya',
+        context: 'Private developers ignored rural and peri-urban markets due to infrastructure costs, unclear land tenure, and low-income target households who couldn\'t qualify for conventional finance.',
+        intervention: 'Innovative developers created "sites and services" projects: surveyed plots with access roads and water connection, sold with clean titles on installment plans. Households then built incrementally with technical support.',
+        outcome: 'Developers successfully served markets previously considered unbankable. Thousands of rural and peri-urban households accessed formal land with services. The model proved financially viable at scale.',
+        metrics: [{ value: '10K+', label: 'Plots developed' }, { value: '98%', label: 'Payment completion rate' }, { value: '$5K', label: 'Average plot cost' }]
+    },
+    // Default/fallback case studies by root cause
+    '_default_supply': {
+        title: 'Vietnam National Housing Development',
+        location: 'Vietnam',
+        context: 'Vietnam faced severe urban housing shortages after economic reforms, with supply constrained by unclear land policies, outdated construction industry, and regulatory barriers.',
+        intervention: 'Comprehensive supply-side reforms included: land law revisions enabling private development, construction industry modernization, building code updates, and infrastructure investment in development areas.',
+        outcome: 'Urban housing stock doubled in 15 years. Private sector became primary housing provider. Homeownership reached 90%+ with improved quality standards.',
+        metrics: [{ value: '2x', label: 'Housing stock growth' }, { value: '90%', label: 'Homeownership' }, { value: '15yrs', label: 'Transformation period' }]
+    },
+    '_default_financing': {
+        title: 'Thailand Housing Finance Transformation',
+        location: 'Thailand',
+        context: 'Thailand\'s housing finance system was underdeveloped, with limited mortgage products, high down payments, and exclusion of informal sector workers who comprised majority of workforce.',
+        intervention: 'Government Housing Bank expanded product range, developed mortgage insurance, created savings-linked programs, and partnered with employers for payroll deduction. Regulatory reforms enabled new market entrants.',
+        outcome: 'Mortgage penetration increased from 5% to over 20% of GDP. Housing finance became accessible to middle-income households. Private banks entered the market with innovative products.',
+        metrics: [{ value: '20%', label: 'Mortgage/GDP ratio' }, { value: '4x', label: 'Market growth' }, { value: '5M+', label: 'Households served' }]
+    }
+};
+
 // ---- Labels ----
 const labels = {
     stakeholder: { government: 'Government', bank: 'Bank / Financial Institution', developer: 'Developer / Builder' },
@@ -2197,6 +2554,73 @@ function showResults() {
     });
 
     solutionsEl.innerHTML = html;
+
+    // Look up and display case study
+    const caseStudyEl = document.getElementById('caseStudySection');
+    let caseStudy = caseStudiesDatabase[key];
+
+    // If no exact match, try fallback based on root cause
+    if (!caseStudy) {
+        caseStudy = caseStudiesDatabase[`_default_${rootCause}`];
+    }
+
+    if (caseStudy) {
+        let metricsHtml = '';
+        if (caseStudy.metrics && caseStudy.metrics.length > 0) {
+            metricsHtml = '<div class="case-study-metrics">';
+            caseStudy.metrics.forEach(metric => {
+                metricsHtml += `
+                    <div class="case-study-metric">
+                        <span class="metric-value">${metric.value}</span>
+                        <span class="metric-label">${metric.label}</span>
+                    </div>
+                `;
+            });
+            metricsHtml += '</div>';
+        }
+
+        caseStudyEl.innerHTML = `
+            <h3>
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                </svg>
+                Real-World Case Study
+            </h3>
+            <div class="case-study-card">
+                <div class="case-study-header">
+                    <div class="case-study-icon">📍</div>
+                    <div class="case-study-title">
+                        <h4>${caseStudy.title}</h4>
+                        <span class="case-study-location">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            ${caseStudy.location}
+                        </span>
+                    </div>
+                </div>
+                <div class="case-study-content">
+                    <div class="case-study-block">
+                        <h5>The Challenge</h5>
+                        <p>${caseStudy.context}</p>
+                    </div>
+                    <div class="case-study-block">
+                        <h5>The Intervention</h5>
+                        <p>${caseStudy.intervention}</p>
+                    </div>
+                    <div class="case-study-block case-study-outcome">
+                        <h5>The Outcome</h5>
+                        <p>${caseStudy.outcome}</p>
+                        ${metricsHtml}
+                    </div>
+                </div>
+            </div>
+        `;
+    } else {
+        caseStudyEl.innerHTML = '';
+    }
 }
 
 function printResults() {
