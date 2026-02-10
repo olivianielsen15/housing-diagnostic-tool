@@ -931,6 +931,339 @@ footer {
     .case-study-outcome { background: #ecfdf5 !important; }
     .case-study-metric { border: 1px solid #10b981; }
 }
+
+/* ---- Tab Navigation ---- */
+.tab-navigation {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    background: rgba(255,255,255,0.05);
+    padding: 6px;
+    border-radius: var(--radius);
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 14px 24px;
+    border: none;
+    background: transparent;
+    color: var(--slate-400);
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.tab-btn:hover {
+    color: var(--slate-200);
+    background: rgba(255,255,255,0.05);
+}
+
+.tab-btn.active {
+    background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(99,102,241,0.3);
+}
+
+.tab-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.tool-container {
+    display: none;
+}
+
+.tool-container.active {
+    display: block;
+}
+
+/* ---- PPP Feasibility Specific ---- */
+.ppp-progress-bar {
+    margin: 0 0 28px;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius);
+    padding: 20px 24px 16px;
+}
+
+.score-gauge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.gauge-circle {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: conic-gradient(
+        var(--gauge-color, var(--accent)) calc(var(--gauge-percent, 0) * 1%),
+        var(--slate-800) 0%
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 0 30px rgba(99,102,241,0.2);
+}
+
+.gauge-circle::before {
+    content: '';
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: var(--glass);
+}
+
+.gauge-value {
+    position: relative;
+    z-index: 1;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--slate-900);
+}
+
+.gauge-label {
+    margin-top: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--slate-600);
+}
+
+.feasibility-verdict {
+    text-align: center;
+    padding: 20px;
+    border-radius: var(--radius-sm);
+    margin-bottom: 32px;
+}
+
+.feasibility-verdict.high {
+    background: linear-gradient(135deg, rgba(16,185,129,0.1), rgba(20,184,166,0.1));
+    border: 1px solid rgba(16,185,129,0.2);
+}
+
+.feasibility-verdict.medium {
+    background: linear-gradient(135deg, rgba(245,158,11,0.1), rgba(251,191,36,0.1));
+    border: 1px solid rgba(245,158,11,0.2);
+}
+
+.feasibility-verdict.low {
+    background: linear-gradient(135deg, rgba(244,63,94,0.1), rgba(239,68,68,0.1));
+    border: 1px solid rgba(244,63,94,0.2);
+}
+
+.feasibility-verdict h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.feasibility-verdict.high h3 { color: var(--emerald); }
+.feasibility-verdict.medium h3 { color: var(--amber); }
+.feasibility-verdict.low h3 { color: var(--rose); }
+
+.feasibility-verdict p {
+    color: var(--slate-600);
+    font-size: 0.95rem;
+}
+
+.dimension-scores {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.dimension-card {
+    background: #fff;
+    border: 1px solid var(--slate-200);
+    border-radius: var(--radius-sm);
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.dimension-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+}
+
+.dimension-card.high::before { background: var(--emerald); }
+.dimension-card.medium::before { background: var(--amber); }
+.dimension-card.low::before { background: var(--rose); }
+
+.dimension-card h4 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--slate-500);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+}
+
+.dimension-score {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 4px;
+}
+
+.dimension-card.high .dimension-score { color: var(--emerald); }
+.dimension-card.medium .dimension-score { color: var(--amber); }
+.dimension-card.low .dimension-score { color: var(--rose); }
+
+.dimension-bar {
+    height: 6px;
+    background: var(--slate-200);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+
+.dimension-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.6s ease;
+}
+
+.dimension-card.high .dimension-bar-fill { background: var(--emerald); }
+.dimension-card.medium .dimension-bar-fill { background: var(--amber); }
+.dimension-card.low .dimension-bar-fill { background: var(--rose); }
+
+.dimension-feedback {
+    font-size: 0.82rem;
+    color: var(--slate-600);
+    line-height: 1.5;
+}
+
+.ppp-recommendations {
+    margin-top: 32px;
+}
+
+.ppp-recommendations h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--slate-900);
+    margin-bottom: 16px;
+}
+
+.recommendation-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.recommendation-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+    background: linear-gradient(135deg, rgba(99,102,241,0.04), rgba(6,182,212,0.04));
+    border: 1px solid rgba(99,102,241,0.1);
+    border-radius: var(--radius-sm);
+}
+
+.recommendation-item .rec-icon {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--cyan));
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.recommendation-item p {
+    font-size: 0.9rem;
+    color: var(--slate-700);
+    line-height: 1.6;
+}
+
+/* PPP Rating Buttons */
+.rating-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.rating-btn {
+    padding: 16px 12px;
+    border: 2px solid var(--slate-200);
+    border-radius: var(--radius-sm);
+    background: #fff;
+    cursor: pointer;
+    transition: all var(--transition);
+    text-align: center;
+    font-family: inherit;
+}
+
+.rating-btn:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.rating-btn.selected {
+    border-color: var(--accent);
+    background: linear-gradient(135deg, var(--accent-50), rgba(224,231,255,0.5));
+}
+
+.rating-btn .rating-value {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--slate-800);
+    display: block;
+    margin-bottom: 4px;
+}
+
+.rating-btn .rating-label {
+    font-size: 0.72rem;
+    color: var(--slate-500);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.rating-btn.selected .rating-value { color: var(--accent); }
+
+.question-group {
+    margin-bottom: 28px;
+}
+
+.question-group label {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--slate-800);
+    margin-bottom: 12px;
+}
+
+@media (max-width: 640px) {
+    .tab-navigation {
+        flex-direction: column;
+    }
+    .rating-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .dimension-scores {
+        grid-template-columns: 1fr;
+    }
+}
     </style>
 </head>
 <body>
@@ -955,6 +1288,27 @@ footer {
     </header>
 
     <main class="container">
+        <!-- Tab Navigation -->
+        <div class="tab-navigation">
+            <button class="tab-btn active" onclick="switchTool('diagnostic')" id="tabDiagnostic">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                </svg>
+                Housing Diagnostic
+            </button>
+            <button class="tab-btn" onclick="switchTool('ppp')" id="tabPPP">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                    <path d="M2 17l10 5 10-5"/>
+                    <path d="M2 12l10 5 10-5"/>
+                </svg>
+                PPP Feasibility
+            </button>
+        </div>
+
+        <!-- TOOL 1: Housing Diagnostic -->
+        <div class="tool-container active" id="diagnosticTool">
+
         <!-- Progress Bar -->
         <div class="progress-bar" id="progressBar">
             <div class="progress-steps">
@@ -1267,6 +1621,449 @@ footer {
                 <button class="btn btn-secondary" onclick="printResults()">Print Results</button>
             </div>
         </section>
+
+        </div><!-- End Diagnostic Tool -->
+
+        <!-- TOOL 2: PPP Feasibility Assessment -->
+        <div class="tool-container" id="pppTool">
+
+        <!-- PPP Progress Bar -->
+        <div class="ppp-progress-bar hidden" id="pppProgressBar">
+            <div class="progress-steps">
+                <div class="step active" data-step="1"><span class="step-number">1</span><span class="step-label">Site</span></div>
+                <div class="step" data-step="2"><span class="step-number">2</span><span class="step-label">Demand</span></div>
+                <div class="step" data-step="3"><span class="step-number">3</span><span class="step-label">Institutional</span></div>
+                <div class="step" data-step="4"><span class="step-number">4</span><span class="step-label">Developer</span></div>
+                <div class="step" data-step="5"><span class="step-number">5</span><span class="step-label">Results</span></div>
+            </div>
+            <div class="progress-track">
+                <div class="progress-fill" id="pppProgressFill"></div>
+            </div>
+        </div>
+
+        <!-- PPP Welcome Screen -->
+        <section class="card welcome-card" id="pppWelcome">
+            <div class="welcome-content">
+                <h2>PPP Feasibility Assessment</h2>
+                <p>Evaluate whether your housing Public-Private Partnership is ready to move forward. This tool assesses four critical dimensions of PPP readiness.</p>
+                <div class="feature-grid">
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 36 36" width="36" height="36" fill="none">
+                                <circle cx="18" cy="18" r="16" fill="url(#pf1)" opacity="0.12"/>
+                                <path d="M18 8v20M8 18h20" stroke="url(#pf1)" stroke-width="2" stroke-linecap="round"/>
+                                <defs><linearGradient id="pf1" x1="0" y1="0" x2="36" y2="36"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#06b6d4"/></linearGradient></defs>
+                            </svg>
+                        </div>
+                        <h3>Site Selection</h3>
+                        <p>Land availability, location, and infrastructure readiness</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 36 36" width="36" height="36" fill="none">
+                                <circle cx="18" cy="18" r="16" fill="url(#pf2)" opacity="0.12"/>
+                                <circle cx="14" cy="14" r="4" stroke="url(#pf2)" stroke-width="2"/>
+                                <circle cx="22" cy="14" r="4" stroke="url(#pf2)" stroke-width="2"/>
+                                <path d="M10 26c0-4 3-6 8-6s8 2 8 6" stroke="url(#pf2)" stroke-width="2"/>
+                                <defs><linearGradient id="pf2" x1="0" y1="0" x2="36" y2="36"><stop stop-color="#8b5cf6"/><stop offset="1" stop-color="#f43f5e"/></linearGradient></defs>
+                            </svg>
+                        </div>
+                        <h3>Effective Demand</h3>
+                        <p>Market demand, affordability, and target population</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 36 36" width="36" height="36" fill="none">
+                                <rect x="6" y="10" width="24" height="18" rx="2" fill="url(#pf3)" opacity="0.12"/>
+                                <rect x="6" y="10" width="24" height="18" rx="2" stroke="url(#pf3)" stroke-width="1.5"/>
+                                <path d="M6 16h24M14 16v12" stroke="url(#pf3)" stroke-width="1.5"/>
+                                <defs><linearGradient id="pf3" x1="6" y1="10" x2="30" y2="28"><stop stop-color="#10b981"/><stop offset="1" stop-color="#14b8a6"/></linearGradient></defs>
+                            </svg>
+                        </div>
+                        <h3>Institutional Readiness</h3>
+                        <p>Government capacity, legal framework, and political support</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 36 36" width="36" height="36" fill="none">
+                                <rect x="4" y="18" width="10" height="12" rx="1" fill="url(#pf4)" opacity="0.3"/>
+                                <rect x="13" y="12" width="10" height="18" rx="1" fill="url(#pf4)" opacity="0.5"/>
+                                <rect x="22" y="6" width="10" height="24" rx="1" fill="url(#pf4)" opacity="0.8"/>
+                                <defs><linearGradient id="pf4" x1="4" y1="6" x2="32" y2="30"><stop stop-color="#f59e0b"/><stop offset="1" stop-color="#ef4444"/></linearGradient></defs>
+                            </svg>
+                        </div>
+                        <h3>Developer Appetite</h3>
+                        <p>Market interest, financing availability, and risk perception</p>
+                    </div>
+                </div>
+                <button class="btn btn-primary btn-large" onclick="startPPP()">Start Assessment</button>
+            </div>
+        </section>
+
+        <!-- PPP Step 1: Site Selection -->
+        <section class="card question-card hidden" id="pppStep1">
+            <div class="question-header">
+                <span class="step-tag">Step 1 of 4</span>
+                <h2>Site Selection & Land Readiness</h2>
+                <p>Evaluate the proposed site's readiness for housing PPP development.</p>
+            </div>
+
+            <div class="question-group">
+                <label>Is suitable land identified and available?</label>
+                <div class="rating-grid">
+                    <button class="rating-btn" data-field="site_land" data-value="1" onclick="selectPPPRating('site_land', 1)">
+                        <span class="rating-value">1</span>
+                        <span class="rating-label">No land identified</span>
+                    </button>
+                    <button class="rating-btn" data-field="site_land" data-value="2" onclick="selectPPPRating('site_land', 2)">
+                        <span class="rating-value">2</span>
+                        <span class="rating-label">Land identified, not secured</span>
+                    </button>
+                    <button class="rating-btn" data-field="site_land" data-value="3" onclick="selectPPPRating('site_land', 3)">
+                        <span class="rating-value">3</span>
+                        <span class="rating-label">Land secured, some issues</span>
+                    </button>
+                    <button class="rating-btn" data-field="site_land" data-value="4" onclick="selectPPPRating('site_land', 4)">
+                        <span class="rating-value">4</span>
+                        <span class="rating-label">Land ready & clear</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <label>Is the site location appropriate for housing (accessibility, services)?</label>
+                <div class="rating-grid">
+                    <button class="rating-btn" data-field="site_location" data-value="1" onclick="selectPPPRating('site_location', 1)">
+                        <span class="rating-value">1</span>
+                        <span class="rating-label">Poor location</span>
+                    </button>
+                    <button class="rating-btn" data-field="site_location" data-value="2" onclick="selectPPPRating('site_location', 2)">
+                        <span class="rating-value">2</span>
+                        <span class="rating-label">Marginal location</span>
+                    </button>
+                    <button class="rating-btn" data-field="site_location" data-value="3" onclick="selectPPPRating('site_location', 3)">
+                        <span class="rating-value">3</span>
+                        <span class="rating-label">Good location</span>
+                    </button>
+                    <button class="rating-btn" data-field="site_location" data-value="4" onclick="selectPPPRating('site_location', 4)">
+                        <span class="rating-value">4</span>
+                        <span class="rating-label">Excellent location</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <label>Is trunk infrastructure available or planned (water, roads, power)?</label>
+                <div class="rating-grid">
+                    <button class="rating-btn" data-field="site_infrastructure" data-value="1" onclick="selectPPPRating('site_infrastructure', 1)">
+                        <span class="rating-value">1</span>
+                        <span class="rating-label">No infrastructure</span>
+                    </button>
+                    <button class="rating-btn" data-field="site_infrastructure" data-value="2" onclick="selectPPPRating('site_infrastructure', 2)">
+                        <span class="rating-value">2</span>
+                        <span class="rating-label">Planned, not funded</span>
+                    </button>
+                    <button class="rating-btn" data-field="site_infrastructure" data-value="3" onclick="selectPPPRating('site_infrastructure', 3)">
+                        <span class="rating-value">3</span>
+                        <span class="rating-label">Funded, in progress</span>
+                    </button>
+                    <button class="rating-btn" data-field="site_infrastructure" data-value="4" onclick="selectPPPRating('site_infrastructure', 4)">
+                        <span class="rating-value">4</span>
+                        <span class="rating-label">Already available</span>
+                    </button>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 12px; margin-top: 20px;">
+                <button class="btn btn-back" onclick="pppGoBack()">Back</button>
+                <button class="btn btn-primary" onclick="pppNextStep()" id="pppNext1" disabled>Continue</button>
+            </div>
+        </section>
+
+        <!-- PPP Step 2: Effective Demand -->
+        <section class="card question-card hidden" id="pppStep2">
+            <div class="question-header">
+                <span class="step-tag">Step 2 of 4</span>
+                <h2>Effective Demand Analysis</h2>
+                <p>Assess whether there is sufficient qualified demand for the housing units.</p>
+            </div>
+
+            <div class="question-group">
+                <label>Has a demand study been conducted for the target market?</label>
+                <div class="rating-grid">
+                    <button class="rating-btn" data-field="demand_study" data-value="1" onclick="selectPPPRating('demand_study', 1)">
+                        <span class="rating-value">1</span>
+                        <span class="rating-label">No study</span>
+                    </button>
+                    <button class="rating-btn" data-field="demand_study" data-value="2" onclick="selectPPPRating('demand_study', 2)">
+                        <span class="rating-value">2</span>
+                        <span class="rating-label">Informal estimates</span>
+                    </button>
+                    <button class="rating-btn" data-field="demand_study" data-value="3" onclick="selectPPPRating('demand_study', 3)">
+                        <span class="rating-value">3</span>
+                        <span class="rating-label">Basic study done</span>
+                    </button>
+                    <button class="rating-btn" data-field="demand_study" data-value="4" onclick="selectPPPRating('demand_study', 4)">
+                        <span class="rating-value">4</span>
+                        <span class="rating-label">Comprehensive study</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <label>Can target households afford the projected housing costs?</label>
+                <div class="rating-grid">
+                    <button class="rating-btn" data-field="demand_affordability" data-value="1" onclick="selectPPPRating('demand_affordability', 1)">
+                        <span class="rating-value">1</span>
+                        <span class="rating-label">Major gap</span>
+                    </button>
+                    <button class="rating-btn" data-field="demand_affordability" data-value="2" onclick="selectPPPRating('demand_affordability', 2)">
+                        <span class="rating-value">2</span>
+                        <span class="rating-label">Significant gap</span>
+                    </button>
+                    <button class="rating-btn" data-field="demand_affordability" data-value="3" onclick="selectPPPRating('demand_affordability', 3)">
+                        <span class="rating-value">3</span>
+                        <span class="rating-label">Manageable with subsidy</span>
+                    </button>
+                    <button class="rating-btn" data-field="demand_affordability" data-value="4" onclick="selectPPPRating('demand_affordability', 4)">
+                        <span class="rating-value">4</span>
+                        <span class="rating-label">Affordable as designed</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <label>Is mortgage/housing finance accessible to the target population?</label>
+                <div class="rating-grid">
+                    <button class="rating-btn" data-field="demand_finance" data-value="1" onclick="selectPPPRating('demand_finance', 1)">
+                        <span class="rating-value">1</span>
+                        <span class="rating-label">No access</span>
+                    </button>
+                    <button class="rating-btn" data-field="demand_finance" data-value="2" onclick="selectPPPRating('demand_finance', 2)">
+                        <span class="rating-value">2</span>
+                        <span class="rating-label">Limited access</span>
+                    </button>
+                    <button class="rating-btn" data-field="demand_finance" data-value="3" onclick="selectPPPRating('demand_finance', 3)">
+                        <span class="rating-value">3</span>
+                        <span class="rating-label">Moderate access</span>
+                    </button>
+                    <button class="rating-btn" data-field="demand_finance" data-value="4" onclick="selectPPPRating('demand_finance', 4)">
+                        <span class="rating-value">4</span>
+                        <span class="rating-label">Good access</span>
+                    </button>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 12px; margin-top: 20px;">
+                <button class="btn btn-back" onclick="pppGoBack()">Back</button>
+                <button class="btn btn-primary" onclick="pppNextStep()" id="pppNext2" disabled>Continue</button>
+            </div>
+        </section>
+
+        <!-- PPP Step 3: Institutional Readiness -->
+        <section class="card question-card hidden" id="pppStep3">
+            <div class="question-header">
+                <span class="step-tag">Step 3 of 4</span>
+                <h2>Institutional Readiness</h2>
+                <p>Evaluate government capacity and enabling environment for PPP delivery.</p>
+            </div>
+
+            <div class="question-group">
+                <label>Is there a legal/regulatory framework for housing PPPs?</label>
+                <div class="rating-grid">
+                    <button class="rating-btn" data-field="inst_legal" data-value="1" onclick="selectPPPRating('inst_legal', 1)">
+                        <span class="rating-value">1</span>
+                        <span class="rating-label">No framework</span>
+                    </button>
+                    <button class="rating-btn" data-field="inst_legal" data-value="2" onclick="selectPPPRating('inst_legal', 2)">
+                        <span class="rating-value">2</span>
+                        <span class="rating-label">Basic framework</span>
+                    </button>
+                    <button class="rating-btn" data-field="inst_legal" data-value="3" onclick="selectPPPRating('inst_legal', 3)">
+                        <span class="rating-value">3</span>
+                        <span class="rating-label">Adequate framework</span>
+                    </button>
+                    <button class="rating-btn" data-field="inst_legal" data-value="4" onclick="selectPPPRating('inst_legal', 4)">
+                        <span class="rating-value">4</span>
+                        <span class="rating-label">Robust framework</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <label>Does the implementing agency have PPP experience/capacity?</label>
+                <div class="rating-grid">
+                    <button class="rating-btn" data-field="inst_capacity" data-value="1" onclick="selectPPPRating('inst_capacity', 1)">
+                        <span class="rating-value">1</span>
+                        <span class="rating-label">No experience</span>
+                    </button>
+                    <button class="rating-btn" data-field="inst_capacity" data-value="2" onclick="selectPPPRating('inst_capacity', 2)">
+                        <span class="rating-value">2</span>
+                        <span class="rating-label">Limited experience</span>
+                    </button>
+                    <button class="rating-btn" data-field="inst_capacity" data-value="3" onclick="selectPPPRating('inst_capacity', 3)">
+                        <span class="rating-value">3</span>
+                        <span class="rating-label">Some experience</span>
+                    </button>
+                    <button class="rating-btn" data-field="inst_capacity" data-value="4" onclick="selectPPPRating('inst_capacity', 4)">
+                        <span class="rating-value">4</span>
+                        <span class="rating-label">Strong track record</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <label>Is there political support and commitment for this PPP?</label>
+                <div class="rating-grid">
+                    <button class="rating-btn" data-field="inst_political" data-value="1" onclick="selectPPPRating('inst_political', 1)">
+                        <span class="rating-value">1</span>
+                        <span class="rating-label">No support</span>
+                    </button>
+                    <button class="rating-btn" data-field="inst_political" data-value="2" onclick="selectPPPRating('inst_political', 2)">
+                        <span class="rating-value">2</span>
+                        <span class="rating-label">Uncertain support</span>
+                    </button>
+                    <button class="rating-btn" data-field="inst_political" data-value="3" onclick="selectPPPRating('inst_political', 3)">
+                        <span class="rating-value">3</span>
+                        <span class="rating-label">Moderate support</span>
+                    </button>
+                    <button class="rating-btn" data-field="inst_political" data-value="4" onclick="selectPPPRating('inst_political', 4)">
+                        <span class="rating-value">4</span>
+                        <span class="rating-label">Strong champion</span>
+                    </button>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 12px; margin-top: 20px;">
+                <button class="btn btn-back" onclick="pppGoBack()">Back</button>
+                <button class="btn btn-primary" onclick="pppNextStep()" id="pppNext3" disabled>Continue</button>
+            </div>
+        </section>
+
+        <!-- PPP Step 4: Developer Appetite -->
+        <section class="card question-card hidden" id="pppStep4">
+            <div class="question-header">
+                <span class="step-tag">Step 4 of 4</span>
+                <h2>Developer & Market Appetite</h2>
+                <p>Assess private sector interest and market conditions for PPP participation.</p>
+            </div>
+
+            <div class="question-group">
+                <label>Have developers expressed interest in this type of project?</label>
+                <div class="rating-grid">
+                    <button class="rating-btn" data-field="dev_interest" data-value="1" onclick="selectPPPRating('dev_interest', 1)">
+                        <span class="rating-value">1</span>
+                        <span class="rating-label">No interest</span>
+                    </button>
+                    <button class="rating-btn" data-field="dev_interest" data-value="2" onclick="selectPPPRating('dev_interest', 2)">
+                        <span class="rating-value">2</span>
+                        <span class="rating-label">Little interest</span>
+                    </button>
+                    <button class="rating-btn" data-field="dev_interest" data-value="3" onclick="selectPPPRating('dev_interest', 3)">
+                        <span class="rating-value">3</span>
+                        <span class="rating-label">Moderate interest</span>
+                    </button>
+                    <button class="rating-btn" data-field="dev_interest" data-value="4" onclick="selectPPPRating('dev_interest', 4)">
+                        <span class="rating-value">4</span>
+                        <span class="rating-label">Strong interest</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <label>Is construction financing available for developers in this market?</label>
+                <div class="rating-grid">
+                    <button class="rating-btn" data-field="dev_financing" data-value="1" onclick="selectPPPRating('dev_financing', 1)">
+                        <span class="rating-value">1</span>
+                        <span class="rating-label">Not available</span>
+                    </button>
+                    <button class="rating-btn" data-field="dev_financing" data-value="2" onclick="selectPPPRating('dev_financing', 2)">
+                        <span class="rating-value">2</span>
+                        <span class="rating-label">Very limited</span>
+                    </button>
+                    <button class="rating-btn" data-field="dev_financing" data-value="3" onclick="selectPPPRating('dev_financing', 3)">
+                        <span class="rating-value">3</span>
+                        <span class="rating-label">Available at cost</span>
+                    </button>
+                    <button class="rating-btn" data-field="dev_financing" data-value="4" onclick="selectPPPRating('dev_financing', 4)">
+                        <span class="rating-value">4</span>
+                        <span class="rating-label">Readily available</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <label>How do developers perceive the risk/return profile?</label>
+                <div class="rating-grid">
+                    <button class="rating-btn" data-field="dev_risk" data-value="1" onclick="selectPPPRating('dev_risk', 1)">
+                        <span class="rating-value">1</span>
+                        <span class="rating-label">Too risky</span>
+                    </button>
+                    <button class="rating-btn" data-field="dev_risk" data-value="2" onclick="selectPPPRating('dev_risk', 2)">
+                        <span class="rating-value">2</span>
+                        <span class="rating-label">High risk concerns</span>
+                    </button>
+                    <button class="rating-btn" data-field="dev_risk" data-value="3" onclick="selectPPPRating('dev_risk', 3)">
+                        <span class="rating-value">3</span>
+                        <span class="rating-label">Acceptable risk</span>
+                    </button>
+                    <button class="rating-btn" data-field="dev_risk" data-value="4" onclick="selectPPPRating('dev_risk', 4)">
+                        <span class="rating-value">4</span>
+                        <span class="rating-label">Attractive opportunity</span>
+                    </button>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 12px; margin-top: 20px;">
+                <button class="btn btn-back" onclick="pppGoBack()">Back</button>
+                <button class="btn btn-primary" onclick="showPPPResults()" id="pppNext4" disabled>View Results</button>
+            </div>
+        </section>
+
+        <!-- PPP Results Screen -->
+        <section class="card results-card hidden" id="pppResults">
+            <div class="results-header">
+                <div class="results-icon">
+                    <svg viewBox="0 0 56 56" width="56" height="56" fill="none">
+                        <circle cx="28" cy="28" r="26" fill="url(#prg)" opacity="0.15"/>
+                        <circle cx="28" cy="28" r="26" stroke="url(#prg)" stroke-width="2" fill="none"/>
+                        <path d="M28 16v12l8 4" stroke="url(#prg)" stroke-width="3" stroke-linecap="round"/>
+                        <defs><linearGradient id="prg" x1="0" y1="0" x2="56" y2="56"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#06b6d4"/></linearGradient></defs>
+                    </svg>
+                </div>
+                <h2>PPP Feasibility Assessment Results</h2>
+                <p>Based on your inputs, here is the feasibility assessment for your housing PPP.</p>
+            </div>
+
+            <!-- Score Gauge -->
+            <div class="score-gauge" id="pppScoreGauge">
+                <!-- Dynamically populated -->
+            </div>
+
+            <!-- Feasibility Verdict -->
+            <div class="feasibility-verdict" id="pppVerdict">
+                <!-- Dynamically populated -->
+            </div>
+
+            <!-- Dimension Scores -->
+            <div class="dimension-scores" id="pppDimensionScores">
+                <!-- Dynamically populated -->
+            </div>
+
+            <!-- Recommendations -->
+            <div class="ppp-recommendations" id="pppRecommendations">
+                <!-- Dynamically populated -->
+            </div>
+
+            <!-- Actions -->
+            <div class="results-actions">
+                <button class="btn btn-primary" onclick="restartPPP()">Start New Assessment</button>
+                <button class="btn btn-secondary" onclick="printResults()">Print Results</button>
+            </div>
+        </section>
+
+        </div><!-- End PPP Tool -->
+
     </main>
 
     <footer>
@@ -2627,9 +3424,301 @@ function printResults() {
     window.print();
 }
 
+// =============================================
+// PPP FEASIBILITY ASSESSMENT TOOL
+// =============================================
+
+// ---- PPP State ----
+const pppState = {
+    currentStep: 0,
+    ratings: {
+        // Site Selection
+        site_land: null,
+        site_location: null,
+        site_infrastructure: null,
+        // Effective Demand
+        demand_study: null,
+        demand_affordability: null,
+        demand_finance: null,
+        // Institutional Readiness
+        inst_legal: null,
+        inst_capacity: null,
+        inst_political: null,
+        // Developer Appetite
+        dev_interest: null,
+        dev_financing: null,
+        dev_risk: null,
+    },
+};
+
+const PPP_STEPS = ['pppWelcome', 'pppStep1', 'pppStep2', 'pppStep3', 'pppStep4', 'pppResults'];
+
+// ---- Tool Switching ----
+function switchTool(tool) {
+    document.querySelectorAll('.tool-container').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+
+    if (tool === 'diagnostic') {
+        document.getElementById('diagnosticTool').classList.add('active');
+        document.getElementById('tabDiagnostic').classList.add('active');
+    } else {
+        document.getElementById('pppTool').classList.add('active');
+        document.getElementById('tabPPP').classList.add('active');
+    }
+}
+
+// ---- PPP Navigation ----
+function showPPPStep(stepIndex) {
+    PPP_STEPS.forEach((id, i) => {
+        const el = document.getElementById(id);
+        if (i === stepIndex) {
+            el.classList.remove('hidden');
+        } else {
+            el.classList.add('hidden');
+        }
+    });
+
+    pppState.currentStep = stepIndex;
+
+    // Update progress bar
+    const progressBar = document.getElementById('pppProgressBar');
+    if (stepIndex === 0) {
+        progressBar.classList.add('hidden');
+    } else {
+        progressBar.classList.remove('hidden');
+    }
+
+    // Update progress steps
+    const steps = progressBar.querySelectorAll('.step');
+    steps.forEach((step, i) => {
+        step.classList.remove('active', 'completed');
+        if (i + 1 < stepIndex) {
+            step.classList.add('completed');
+        } else if (i + 1 === stepIndex) {
+            step.classList.add('active');
+        }
+    });
+
+    // Update progress fill
+    const fill = document.getElementById('pppProgressFill');
+    const percent = stepIndex === 0 ? 0 : ((stepIndex - 1) / 4) * 100;
+    fill.style.width = percent + '%';
+}
+
+function startPPP() {
+    // Reset state
+    Object.keys(pppState.ratings).forEach(key => pppState.ratings[key] = null);
+    // Clear selections
+    document.querySelectorAll('#pppTool .rating-btn').forEach(btn => btn.classList.remove('selected'));
+    // Disable continue buttons
+    document.querySelectorAll('#pppTool [id^="pppNext"]').forEach(btn => btn.disabled = true);
+    showPPPStep(1);
+}
+
+function pppGoBack() {
+    if (pppState.currentStep > 1) {
+        showPPPStep(pppState.currentStep - 1);
+    } else {
+        showPPPStep(0);
+    }
+}
+
+function pppNextStep() {
+    if (pppState.currentStep < 4) {
+        showPPPStep(pppState.currentStep + 1);
+    }
+}
+
+function restartPPP() {
+    showPPPStep(0);
+}
+
+// ---- PPP Rating Selection ----
+function selectPPPRating(field, value) {
+    pppState.ratings[field] = value;
+
+    // Update UI
+    const buttons = document.querySelectorAll(`[data-field="${field}"]`);
+    buttons.forEach(btn => {
+        btn.classList.remove('selected');
+        if (parseInt(btn.dataset.value) === value) {
+            btn.classList.add('selected');
+        }
+    });
+
+    // Check if current step is complete
+    checkPPPStepComplete();
+}
+
+function checkPPPStepComplete() {
+    const step = pppState.currentStep;
+    let complete = false;
+
+    if (step === 1) {
+        complete = pppState.ratings.site_land && pppState.ratings.site_location && pppState.ratings.site_infrastructure;
+        document.getElementById('pppNext1').disabled = !complete;
+    } else if (step === 2) {
+        complete = pppState.ratings.demand_study && pppState.ratings.demand_affordability && pppState.ratings.demand_finance;
+        document.getElementById('pppNext2').disabled = !complete;
+    } else if (step === 3) {
+        complete = pppState.ratings.inst_legal && pppState.ratings.inst_capacity && pppState.ratings.inst_political;
+        document.getElementById('pppNext3').disabled = !complete;
+    } else if (step === 4) {
+        complete = pppState.ratings.dev_interest && pppState.ratings.dev_financing && pppState.ratings.dev_risk;
+        document.getElementById('pppNext4').disabled = !complete;
+    }
+}
+
+// ---- PPP Results ----
+function showPPPResults() {
+    const r = pppState.ratings;
+
+    // Calculate dimension scores (out of 12 each, convert to percentage)
+    const siteScore = r.site_land + r.site_location + r.site_infrastructure;
+    const demandScore = r.demand_study + r.demand_affordability + r.demand_finance;
+    const instScore = r.inst_legal + r.inst_capacity + r.inst_political;
+    const devScore = r.dev_interest + r.dev_financing + r.dev_risk;
+
+    const totalScore = siteScore + demandScore + instScore + devScore;
+    const maxScore = 48;
+    const percentage = Math.round((totalScore / maxScore) * 100);
+
+    // Determine overall feasibility
+    let feasibility, verdictClass, verdictText, gaugeColor;
+    if (percentage >= 75) {
+        feasibility = 'High';
+        verdictClass = 'high';
+        verdictText = 'Your housing PPP shows strong feasibility. Key success factors are in place, though continuous monitoring and stakeholder engagement remain important.';
+        gaugeColor = 'var(--emerald)';
+    } else if (percentage >= 50) {
+        feasibility = 'Medium';
+        verdictClass = 'medium';
+        verdictText = 'Your housing PPP has moderate feasibility. Several areas need strengthening before proceeding. Focus on addressing the lowest-scoring dimensions.';
+        gaugeColor = 'var(--amber)';
+    } else {
+        feasibility = 'Low';
+        verdictClass = 'low';
+        verdictText = 'Your housing PPP faces significant feasibility challenges. Substantial preparatory work is needed across multiple dimensions before this project can succeed.';
+        gaugeColor = 'var(--rose)';
+    }
+
+    // Render score gauge
+    document.getElementById('pppScoreGauge').innerHTML = `
+        <div class="gauge-circle" style="--gauge-percent: ${percentage}; --gauge-color: ${gaugeColor}">
+            <span class="gauge-value">${percentage}%</span>
+        </div>
+        <span class="gauge-label">Overall Feasibility Score</span>
+    `;
+
+    // Render verdict
+    document.getElementById('pppVerdict').className = `feasibility-verdict ${verdictClass}`;
+    document.getElementById('pppVerdict').innerHTML = `
+        <h3>${feasibility} Feasibility</h3>
+        <p>${verdictText}</p>
+    `;
+
+    // Render dimension scores
+    const dimensions = [
+        { name: 'Site Selection', score: siteScore, max: 12, fields: ['site_land', 'site_location', 'site_infrastructure'] },
+        { name: 'Effective Demand', score: demandScore, max: 12, fields: ['demand_study', 'demand_affordability', 'demand_finance'] },
+        { name: 'Institutional Readiness', score: instScore, max: 12, fields: ['inst_legal', 'inst_capacity', 'inst_political'] },
+        { name: 'Developer Appetite', score: devScore, max: 12, fields: ['dev_interest', 'dev_financing', 'dev_risk'] },
+    ];
+
+    const dimensionFeedback = {
+        site_land: { low: 'Land acquisition is a critical blocker', high: 'Land is secured and ready' },
+        site_location: { low: 'Location challenges may affect demand', high: 'Excellent location for housing' },
+        site_infrastructure: { low: 'Infrastructure gaps need addressing', high: 'Infrastructure is in place' },
+        demand_study: { low: 'Conduct formal demand assessment', high: 'Demand is well understood' },
+        demand_affordability: { low: 'Affordability gap needs subsidy design', high: 'Target market can afford units' },
+        demand_finance: { low: 'Mortgage access is a major barrier', high: 'Buyers can access financing' },
+        inst_legal: { low: 'PPP framework needs development', high: 'Robust PPP legal framework exists' },
+        inst_capacity: { low: 'Build government PPP capacity first', high: 'Strong institutional capacity' },
+        inst_political: { low: 'Political buy-in is uncertain', high: 'Strong political support exists' },
+        dev_interest: { low: 'Need to attract developer interest', high: 'Developers are keen to participate' },
+        dev_financing: { low: 'Construction finance is scarce', high: 'Financing is available' },
+        dev_risk: { low: 'Risk perception is too high', high: 'Developers see attractive returns' },
+    };
+
+    let dimHtml = '';
+    dimensions.forEach(dim => {
+        const pct = Math.round((dim.score / dim.max) * 100);
+        let level = pct >= 75 ? 'high' : pct >= 50 ? 'medium' : 'low';
+
+        // Find weakest area in dimension
+        let weakest = dim.fields[0];
+        let weakestScore = r[dim.fields[0]];
+        dim.fields.forEach(f => {
+            if (r[f] < weakestScore) {
+                weakest = f;
+                weakestScore = r[f];
+            }
+        });
+        const feedback = weakestScore <= 2 ? dimensionFeedback[weakest].low : dimensionFeedback[weakest].high;
+
+        dimHtml += `
+            <div class="dimension-card ${level}">
+                <h4>${dim.name}</h4>
+                <div class="dimension-score">${dim.score}/${dim.max}</div>
+                <div class="dimension-bar">
+                    <div class="dimension-bar-fill" style="width: ${pct}%"></div>
+                </div>
+                <p class="dimension-feedback">${feedback}</p>
+            </div>
+        `;
+    });
+    document.getElementById('pppDimensionScores').innerHTML = dimHtml;
+
+    // Generate recommendations based on lowest scores
+    const allRatings = Object.entries(pppState.ratings).map(([key, val]) => ({ key, val }));
+    allRatings.sort((a, b) => a.val - b.val);
+
+    const recommendations = {
+        site_land: 'Prioritize land acquisition and ensure clear title. Consider government land contribution as part of PPP structure.',
+        site_location: 'Re-evaluate site selection criteria. Consider locations with better transport links and access to employment.',
+        site_infrastructure: 'Develop infrastructure investment plan. Consider phased approach or government pre-investment in trunk infrastructure.',
+        demand_study: 'Commission a comprehensive demand study to validate market size, willingness to pay, and target segment characteristics.',
+        demand_affordability: 'Design subsidy mechanisms to bridge affordability gap. Consider cross-subsidy models or government capital grants.',
+        demand_finance: 'Engage mortgage lenders early. Consider mortgage guarantee facilities or employer-assisted housing programs.',
+        inst_legal: 'Develop or strengthen PPP legal framework. Consider technical assistance from development partners.',
+        inst_capacity: 'Invest in capacity building for the implementing agency. Consider hiring transaction advisors for this project.',
+        inst_political: 'Secure formal government commitment. Brief key decision-makers and ensure project is in official development plans.',
+        dev_interest: 'Conduct market sounding with developers. Understand their concerns and adjust project structure accordingly.',
+        dev_financing: 'Engage with banks and DFIs to improve construction finance availability. Consider project-level guarantees.',
+        dev_risk: 'Address key risk factors through appropriate risk allocation. Consider government guarantees for specific risks.',
+    };
+
+    let recHtml = '<h3>Priority Actions</h3><div class="recommendation-list">';
+    let count = 1;
+    for (const rating of allRatings) {
+        if (rating.val <= 2 && count <= 4) {
+            recHtml += `
+                <div class="recommendation-item">
+                    <div class="rec-icon">${count}</div>
+                    <p>${recommendations[rating.key]}</p>
+                </div>
+            `;
+            count++;
+        }
+    }
+    if (count === 1) {
+        recHtml += `
+            <div class="recommendation-item">
+                <div class="rec-icon">✓</div>
+                <p>Your PPP scores well across all dimensions. Focus on maintaining stakeholder engagement and proceed with detailed project preparation and procurement.</p>
+            </div>
+        `;
+    }
+    recHtml += '</div>';
+    document.getElementById('pppRecommendations').innerHTML = recHtml;
+
+    showPPPStep(5);
+}
+
 // ---- Initialize ----
 document.addEventListener('DOMContentLoaded', () => {
     showStep(0);
+    showPPPStep(0);
 });
 
     </script>
